@@ -14,12 +14,14 @@ def submit(request, question_id):
             selected_choice=selected_choice
         )
 
-        return render(request, "result.html", {
+        return render(request, "courses/result.html", {
             "question": question,
             "selected_choice": selected_choice
         })
 
-    return render(request, "submit.html", {"question": question})
+    return render(request, "courses/submit.html", {
+        "question": question
+    })
 
 
 def show_exam_result(request):
@@ -32,7 +34,7 @@ def show_exam_result(request):
         if submission.selected_choice.is_correct:
             score += 1
 
-    return render(request, "exam_result.html", {
+    return render(request, "courses/exam_result.html", {
         "submissions": submissions,
         "score": score,
         "total": total
