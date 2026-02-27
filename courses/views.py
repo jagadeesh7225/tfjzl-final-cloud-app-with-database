@@ -24,6 +24,16 @@ def submit(request, question_id):
 
 def show_exam_result(request):
     submissions = Submission.objects.all()
+
+    score = 0
+    total = submissions.count()
+
+    for submission in submissions:
+        if submission.selected_choice.is_correct:
+            score += 1
+
     return render(request, "exam_result.html", {
-        "submissions": submissions
+        "submissions": submissions,
+        "score": score,
+        "total": total
     })
